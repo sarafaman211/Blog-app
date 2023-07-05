@@ -18,10 +18,10 @@ const postCtrl = {
 
     addBlog: async (req, res) => {
         try {
-            const { title, description } = req.body
+            const { title, description, imageUrl } = req.body
 
             const blog = new Post({
-                title, description, user: req.user._id
+                title, description,imageUrl, user: req.user._id
             })
 
             const newBlog = await blog.save()

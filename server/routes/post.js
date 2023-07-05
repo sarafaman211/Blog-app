@@ -13,20 +13,12 @@ const storage = multer.diskStorage({
     }
 });
 
-const fileFilter = (req, file, cb) => {
-    const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-    if(allowedFileTypes.includes(file.mimetype)) {
-        cb(null, true);
-    } else {
-        cb(null, false);
-    }
-}
 
-const upload = multer({ storage: fileFilter })
+const upload = multer({ storage: storage })
 // Routers
 router.get("/allBlogs", postCtrl.allBlogs)
 router.get("/blogs/:id",auth, postCtrl.blogs)
-router.post("/addBlogs",auth,upload.single("file"), postCtrl.addBlog)
+router.post("/addBlogs",auth,upload.single("image"), postCtrl.addBlog)
 router.put("/updateBlog/:id",auth, postCtrl.updateBlog)
 router.delete("/deleteBlog/:id",auth, postCtrl.deleteBlog)
 

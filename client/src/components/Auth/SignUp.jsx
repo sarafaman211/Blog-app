@@ -23,7 +23,7 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const data = await fetch("http://localhost:5000/api/user/directRegister", {
+        const data = await fetch("https://blog-app-tp76.onrender.com/api/user/directRegister", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

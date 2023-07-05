@@ -13,7 +13,7 @@ const User = ({ open }) => {
 
     const handleSubmit = async () => {
 
-        const data = await fetch("http://localhost:5000/api/user/login", {
+        const data = await fetch("https://blog-app-tp76.onrender.com/api/user/login", {
             method: "GET",
             headers: {
                 "auth-token": localStorage.getItem("token")

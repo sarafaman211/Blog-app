@@ -2,25 +2,29 @@ import React, { useContext, useState } from 'react'
 import { Link } from "react-router-dom"
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi"
 import Moment from "moment"
-import { FaTimes } from "react-icons/fa"
 import blogContext from '../../../Context/blogContext'
+import toast, {Toaster} from "react-hot-toast"
 
 
 const PostItems = ({ blogs }) => {
 
     const { title, description, image, likes, comments, date, _id } = blogs
-    const { likePost, unLikePost } = useContext(blogContext)
-    const [likeCount, setLikeCount] = useState(likes.length)
+    const { likePost, unLikePost, deleteBlogs } = useContext(blogContext)
 
     const handleLike = (e) => {
         e.preventDefault()
         likePost(_id)
-        setLikeCount(likeCount +1)
     }
-
+    
+    const deleteBlog = () => {
+        deleteBlogs(_id)
+        toast.success("Post Deleted !!!")
+    }
+    
     return (
         <>
             <div className='col-md-6 g-4' >
+        <div style={{ fontSize: "1.5rem" }}><Toaster /></div>
                 <div className='card' style={{ width: "50rem", padding: "2rem" }}>
                     <Link to={`/singlePost/${_id}`}>
                         <div style={{ textAlign: 'center' }}>
@@ -49,10 +53,12 @@ const PostItems = ({ blogs }) => {
                                     <span className='comment-count'>{comments.length}</span>
                                 )}
                             </Link>
+                            {localStorage.getItem("token")?<button type='submit' onClick={deleteBlog} className='btn btn-primary'>Delete</button> : null}
                         </div>
                     </div>
                 </div>
             </div>
+
         </>
     )
 }

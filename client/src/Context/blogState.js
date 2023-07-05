@@ -129,7 +129,23 @@ const BlogState = ({ children, match }) => {
     })
 
     const res = await data.json()
+    // console.log(res)
+  }
+
+  // delete Blogs
+  const deleteBlogs = async (id) => {
+    const data = await fetch(`http://localhost:5000/api/post/deleteblog/${id}`, {
+      method: "DELETE",
+      headers: {
+        "content-Type": "application/json",
+        "auth-token": localStorage.getItem("token")
+      }
+    })
+
+    const res = await data.json()
     console.log(res)
+    const deleteData = dashData.filter(data => { return data._id !== id })
+    setDashData(deleteData)
   }
 
   useEffect(() => {
@@ -139,7 +155,7 @@ const BlogState = ({ children, match }) => {
 
 
   return (
-    <BlogContext.Provider value={{ dashBoard, dashData, deleteUser, blogData, likePost, unLikePost, addComment, deleteComment, singleBlog, blogView, addBlogs }}>
+    <BlogContext.Provider value={{ dashBoard, dashData, deleteUser, blogData, likePost, unLikePost, addComment, deleteComment, singleBlog, blogView, addBlogs, deleteBlogs }}>
       {children}
     </BlogContext.Provider>
   )

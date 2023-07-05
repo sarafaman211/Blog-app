@@ -14,7 +14,7 @@ import Errors from "./components/layout/Errors";
 
 function App() {
 
-  const [isAdmin, setIsAdmin] = useState(true)
+  let isAdmin = false
   return (
 
     <Router>
@@ -26,7 +26,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/home" element={<Home />} />
           <Route path="/posts" element={<Posts />} />
-          {isAdmin ? <Route path="/dashboard" element={<Dashboard />} />: <Route path="/error" element={<Errors />} /> }
+          {isAdmin = true ? <Route path="/dashboard" element={<Dashboard />} />: <Route path="/error" element={<Errors />} /> }
           <Route path="/allPosts" element={<Allposts />} />
           <Route exact path="/singlePost/:id" element={<SinglePost />} />
       </Routes>
